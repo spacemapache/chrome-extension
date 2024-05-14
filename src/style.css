@@ -1,0 +1,29 @@
+#input-element {
+  width: 250px;
+  height: 20px;
+  box-shadow: 5px 5px 5px hsla(0, 1%, 15%, 0.137);
+  border-radius: 5px;
+  border: 1px solid black;
+  font-family: "Reddit Mono", monospace;
+}
+
+#btn {
+  height: 25px;
+  width: 60px;
+  text-align: center;
+  font-family: "Reddit Mono", monospace;
+  font-weight: bold;
+  box-shadow: 5px 5px 5px hsla(0, 1%, 15%, 0.137);
+  border-radius: 5px;
+  background-color: hsl(120, 84%, 19%);
+  color: white;
+}
+
+li {
+  font-family: "Reddit Mono", monospace;
+}
+
+li a {
+  color: black;
+  text-decoration: none;
+}
