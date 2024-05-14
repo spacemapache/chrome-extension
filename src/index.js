@@ -3,10 +3,17 @@ let myLeads = [];
 const inputElement = document.getElementById("inputElement");
 const leadList = document.getElementById("leadList");
 
-let saveBtn = document.getElementById("btn");
+const deleteBtn = document.getElementById("deleteBtn");
+deleteBtn.addEventListener("dblclick", deleteLead);
+
+const saveBtn = document.getElementById("saveBtn");
 saveBtn.addEventListener("click", saveLead);
 
-let leads = JSON.parse(localStorage.getItem("myLeads"));
+const leads = JSON.parse(localStorage.getItem("myLeads"));
+if (leads) {
+  myLeads = leads;
+  displayLeads();
+}
 
 function saveLead() {
   myLeads.push(inputElement.value);
@@ -27,4 +34,10 @@ function displayLeads() {
     console.log(listItems);
   }
   leadList.innerHTML = listItems;
+}
+
+function deleteLead() {
+  localStorage.clear();
+  myLeads = [];
+  displayLeads();
 }
