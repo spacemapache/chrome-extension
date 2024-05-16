@@ -2,42 +2,49 @@ let myLeads = [];
 
 const inputElement = document.getElementById("inputElement");
 const leadList = document.getElementById("leadList");
-
-const deleteBtn = document.getElementById("deleteBtn");
-deleteBtn.addEventListener("dblclick", deleteLead);
-
 const saveBtn = document.getElementById("saveBtn");
-saveBtn.addEventListener("click", saveLead);
+const deleteBtn = document.getElementById("deleteBtn");
+const saveTabBtn = document.getElementById("saveTabBtn");
+const leadsLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+const tab = [{ url: "https://linkedin.com" }];
 
-const leads = JSON.parse(localStorage.getItem("myLeads"));
-if (leads) {
-  myLeads = leads;
-  displayLeads();
+deleteBtn.addEventListener("dblclick", deleteLead);
+saveBtn.addEventListener("click", saveLead);
+saveTabBtn.addEventListener("click", saveTab);
+
+if (leadsLocalStorage) {
+  myLeads = leadsLocalStorage;
+  display(myLeads);
+}
+
+function display(leads) {
+  let listItems = "";
+  for (let i = 0; i < leads.length; i++) {
+    listItems += `<li>
+    <a href="${leads[i]}" target="_blank">
+    ${leads[i]}
+    </a>
+    </li>`;
+  }
+  leadList.innerHTML = listItems;
 }
 
 function saveLead() {
   myLeads.push(inputElement.value);
-  displayLeads();
+  display();
   inputElement.value = "";
   localStorage.setItem("myLeads", JSON.stringify(myLeads));
-  displayLeads();
-}
-
-function displayLeads() {
-  let listItems = "";
-  for (let i = 0; i < myLeads.length; i++) {
-    listItems += `<li>
-    <a href="${myLeads[i]}" target="_blank">
-    ${myLeads[i]}
-    </a>
-    </li>`;
-    console.log(listItems);
-  }
-  leadList.innerHTML = listItems;
+  display(myLeads);
 }
 
 function deleteLead() {
   localStorage.clear();
   myLeads = [];
-  displayLeads();
+  display(myLeads);
+}
+
+function saveTab() {
+  myLeads.push(tab[0].url);
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
+  display(myLeads);
 }
